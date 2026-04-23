@@ -2,29 +2,36 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build CG_Lab1",
+            "label": "Build Active File",
             "type": "shell",
             "command": "gcc",
             "args": [
-                "${workspaceFolder}/CG_Lab1.c",
+                "${file}",
                 "-o",
-                "${workspaceFolder}/CG_Lab1",
+                "${fileDirname}/${fileBasenameNoExtension}",
                 "-lGL", "-lGLU", "-lglut", "-lm"
             ],
             "group": { "kind": "build", "isDefault": true },
             "problemMatcher": ["$gcc"]
         },
         {
-            "label": "Run CG_Lab1",
+            "label": "Run Active File",
             "type": "shell",
-            "command": "${workspaceFolder}/CG_Lab1",
-            "dependsOn": "Build CG_Lab1",
+            "command": "${fileDirname}/${fileBasenameNoExtension}",
+            "dependsOn": "Build Active File",
             "options": {
                 "env": {
                     "DISPLAY": ":1"
                 }
             },
             "group": "test"
+        },
+        {
+            "label": "Build & Run Active File",
+            "type": "shell",
+            "command": "gcc ${file} -o ${fileDirname}/${fileBasenameNoExtension} -lGL -lGLU -lglut -lm && DISPLAY=:1 ${fileDirname}/${fileBasenameNoExtension}",
+            "group": "test",
+            "problemMatcher": ["$gcc"]
         }
     ]
 }
